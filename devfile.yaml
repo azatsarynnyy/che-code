@@ -25,7 +25,6 @@ components:
   - name: projects
     volume:
       size: 3Gi
-  - components:
   - name: devworkspace-telemetry-woopra-plugin
     attributes:
       app.kubernetes.io/component: telemetry
