@@ -25,10 +25,23 @@ components:
   - name: projects
     volume:
       size: 3Gi
-  - attributes:
-      name: telemetry
-      plugin:
-        uri: https://gist.githubusercontent.com/dkwon17/d2f800494959dadd1106512b0c56275e/raw/5fada3206ee6dba868fd73086acc21d46682cce8/woopra-test.yaml
+  - components:
+  - name: devworkspace-telemetry-woopra-plugin
+    attributes:
+      app.kubernetes.io/component: telemetry
+      app.kubernetes.io/part-of: che-theia.eclipse.org
+      workspaceEnv:
+        - name: DEVWORKSPACE_TELEMETRY_BACKEND_PORT
+          value: '4167'
+    container:
+      image: quay.io/eclipse/devworkspace-telemetry-woopra-plugin:34bf91e
+      env:
+        - name: WOOPRA_DOMAIN_ENDPOINT
+          value: 'https://registration-service-toolchain-host-operator.apps.sandbox-stage.gb17.p1.openshiftapps.com/api/v1/woopra-domain'
+        - name: SEGMENT_WRITE_KEY_ENDPOINT
+          value: 'https://registration-service-toolchain-host-operator.apps.sandbox-stage.gb17.p1.openshiftapps.com/api/v1/segment-write-key'
+        - name: QUARKUS_LOG_LEVEL
+          value: DEBUG
 commands:
   - id: prepare
     exec:
