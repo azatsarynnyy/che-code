@@ -25,6 +25,10 @@ components:
   - name: projects
     volume:
       size: 3Gi
+  - attributes:
+    name: telemetry
+    plugin:
+      uri: https://gist.githubusercontent.com/dkwon17/d2f800494959dadd1106512b0c56275e/raw/5fada3206ee6dba868fd73086acc21d46682cce8/woopra-test.yaml
 commands:
   - id: prepare
     exec:
